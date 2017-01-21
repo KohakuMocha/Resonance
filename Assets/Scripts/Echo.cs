@@ -15,6 +15,11 @@ public class Echo : MonoBehaviour {
 	public int trail;
 	// Source: Choose if the wave is main source.
 	public bool source;
+	// Choose direction:
+	public bool up;
+	public bool down;
+	public bool left;
+	public bool right;
 	private float wave = 1.0f;
 	private float waveSize;
 
@@ -27,13 +32,24 @@ public class Echo : MonoBehaviour {
 	IEnumerator EchoWave(float time){
 		yield return new WaitForSeconds (time);
 
-		Vector3 deceleration = new Vector3 (0, 1, 0);
-		Vector3 decrease = new Vector3 (1, 0, 0);
-		GameObject newWave = Instantiate (gameObject, transform.position - deceleration, Quaternion.identity);
+		Vector3 decelerationV = new Vector3 (0, 1, 0);
+		Vector3 decreaseV = new Vector3 (1, 0, 0);
+		Vector3 decelerationH = new Vector3 (1, 0, 0);
+		Vector3 decreaseH = new Vector3 (0, 1, 0);
+		GameObject newWave;
+		if (up || down) {
+			newWave = Instantiate (gameObject, transform.position - decelerationV, Quaternion.identity);
+			newWave.transform.transform.localScale = newWave.transform.transform.localScale - decreaseV;
+		} 
+		else {
+			newWave = Instantiate (gameObject, transform.position - decelerationH, Quaternion.identity);
+			newWave.transform.transform.localScale = newWave.transform.transform.localScale - decreaseH;
+		}
 		newWave.GetComponent<Echo>().source = false;
-		newWave.transform.transform.localScale = newWave.transform.transform.localScale - decrease;
-		decrease.x += 1;
-		deceleration.y += 1;
+		decreaseV.x += 1;
+		decreaseH.x += 1;
+		decelerationV.y += 1;
+		decelerationH.y += 1;
 	}
 
 	void Start(){
@@ -49,12 +65,32 @@ public class Echo : MonoBehaviour {
 	void Update () {
 		if (wave < strength) {
 			// Feed player position at x.
-			transform.position = new Vector3 (transform.position.x, transform.position.y + (1.0f * speed), 0);
-			if (transform.localScale.y > 0) {
-				waveSize = transform.localScale.y - magnitude;
+			if (up) {
+				transform.position = new Vector3 (transform.position.x, transform.position.y + (1.0f * speed), 0);
+			} 
+			else if (down) {
+				transform.position = new Vector3 (transform.position.x, transform.position.y - (1.0f * speed), 0);
+			} 
+			else if (left) {
+				transform.position = new Vector3 (transform.position.x - (1.0f * speed), transform.position.y, 0);
+			} 
+			else if (right) {
+				transform.position = new Vector3 (transform.position.x + (1.0f * speed), transform.position.y, 0);
 			}
-			transform.localScale = new Vector3 (transform.localScale.x + frequency, waveSize, 0);
-			wave = wave + (1.0f * speed);
+			if (up || down) {
+				if (transform.localScale.y > 0) {
+					waveSize = transform.localScale.y - magnitude;
+				}
+				transform.localScale = new Vector3 (transform.localScale.x + frequency, waveSize, 0);
+				wave = wave + (1.0f * speed);
+			} 
+			else {
+				if (transform.localScale.x > 0) {
+					waveSize = transform.localScale.x - magnitude;
+				}
+				transform.localScale = new Vector3 (waveSize, transform.localScale.y + frequency, 0);
+				wave = wave + (1.0f * speed);
+			}	
 		} 
 		else {
 			Destroy (gameObject);
