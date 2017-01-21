@@ -10,40 +10,15 @@ public class MoveableObject : MonoBehaviour {
     Vector3 end;
     float lerpdist;
     private float time;
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            Vector3 position = collision.transform.position;
-            position -= this.transform.position;
-            if (Mathf.Abs(position.x) >= Mathf.Abs(position.y))
-            {
-                if (position.x > 0)
-                {
-                    //Create Coroutine to slowly transform position to give animation
-                    Vector3 EndPosition = transform.position - transform.right * Distance;
-                    StartCoroutine(BoulderAnimation(EndPosition));
-                }
-                else
-                {
-                    Vector3 EndPosition = transform.position + transform.right * Distance;
-                    StartCoroutine(BoulderAnimation(EndPosition));
-                }
-            }
-            else
-            {
-                if (position.y > 0)
-                {
-                    Vector3 EndPosition = transform.position - transform.up * Distance;
-                    StartCoroutine(BoulderAnimation(EndPosition));
-                }
-                else
-                {
-                    Vector3 EndPosition = transform.position + transform.up * Distance;
-                    StartCoroutine(BoulderAnimation(EndPosition));
-                }
-
-            }
+            print("Collision");
+            Vector2 dir = collision.contacts[0].point - (Vector2)this.transform.position;
+            dir = -dir.normalized;
+            StartCoroutine(BoulderAnimation(dir * Distance));
+            
         }
     }
     private IEnumerator BoulderAnimation(Vector3 EndPos)
@@ -69,6 +44,13 @@ public class MoveableObject : MonoBehaviour {
             }
         }
 
+    }
+    int[] ScreenToIso(Vector3 Screen)
+    {
+        int[] coords = new int[2];
+        coords[0] = Mathf.FloorToInt(Screen.y / (64) + Screen.x / (64));
+        coords[1] = Mathf.FloorToInt(Screen.y / (64) - Screen.x / (64));
+        return coords;
     }
 }
 
