@@ -33,7 +33,7 @@ public class MoveableObject : MonoBehaviour {
                 }
                 else
                 {
-                    Vector3 EndPosition = transform.position - transform.right * Distance;
+                    Vector3 EndPosition = transform.position + transform.up * Distance;
                     StartCoroutine(BoulderAnimation(EndPosition));
                 }
 
