@@ -28,6 +28,6 @@ public class InteractableObject : MonoBehaviour {
     }
     public void addItemToInventory()
     {
-        GameObject.Find("Character").GetComponent<Inventory>().inventory.Add(this);
+        Player.Instance.GetComponent<Inventory>().inventory.Add(this);
     }
 }
