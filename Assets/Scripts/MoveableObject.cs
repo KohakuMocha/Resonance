@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class MoveableObject : MonoBehaviour {
     public float Distance;
+    public float Speed = 1;
+    private bool lerping;
+    Vector3 start;
+    Vector3 end;
+    float lerpdist;
+    private float time;
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
@@ -43,15 +49,25 @@ public class MoveableObject : MonoBehaviour {
     private IEnumerator BoulderAnimation(Vector3 EndPos)
     {
         Vector3 StartPos = this.transform.position;
+        start = StartPos;
+        end = EndPos;
         Vector3 Movement = (EndPos - StartPos) * .25f;
-        GetComponent<Rigidbody2D>().MovePosition(transform.position + Movement);
         yield return new WaitForSecondsRealtime(.2f);
-        GetComponent<Rigidbody2D>().MovePosition(transform.position + Movement);
-        yield return new WaitForSecondsRealtime(.2f);
-        GetComponent<Rigidbody2D>().MovePosition(transform.position + Movement);
-        yield return new WaitForSecondsRealtime(.2f);
-        GetComponent<Rigidbody2D>().MovePosition(transform.position + Movement);
-        yield return new WaitForSecondsRealtime(.2f);
+        lerpdist = Vector3.Distance(start, end);
+        lerping = true;
+        time = Time.time;
+    }
+    private void Update()
+    {
+        if (lerping)
+        {
+            
+            transform.position = Vector3.Lerp(start, end, (Speed * (Time.time-time))/ lerpdist);
+            if(transform.position == end)
+            {
+                lerping = false;
+            }
+        }
 
     }
 }
