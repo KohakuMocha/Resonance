@@ -6,6 +6,7 @@ public class Player : Singleton<Player> {
 
     public int speed;
     public Vector3 savePosition;
+    public GameObject echoSpawn;
     private Vector3 MousePos;
 
 	// Use this for initialization
@@ -20,7 +21,11 @@ public class Player : Singleton<Player> {
 
         UpdateMouse();
 
-        if (Input.GetButton("Up"))
+        if(Input.GetMouseButtonDown(0))
+        {
+            GameObject echo = (GameObject)Instantiate(Resources.Load("Prefabs/Echo2"), echoSpawn.transform.position, Quaternion.identity);
+        }
+        else if (Input.GetButton("Up"))
         {
             GetComponent<Rigidbody2D>().MovePosition(transform.position + transform.up * speed * Time.deltaTime);
         }
@@ -50,8 +55,6 @@ public class Player : Singleton<Player> {
             mouse_angle *= -1;
         else
             mouse_angle = 360 - mouse_angle;
-        print("mouse: "+mouse_angle);
-        print("player: "+player_angle);
         float angle_difference = mouse_angle - player_angle;
 
         if ((Mathf.Abs(angle_difference) > 1) || (player_angle > 359 && mouse_angle < 1))
