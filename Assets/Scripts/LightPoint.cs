@@ -63,6 +63,7 @@ public class LightPoint : MonoBehaviour {
     void OnTriggerEnter2D(Collider2D other)
     {
         //if (other.gameObject.tag.Equals("objectLight")) StartCoroutine(startLight(0.7f, .1f, 3));
+        Debug.Log("I HIT YOU!");
         StartCoroutine(startLight(boundingBox, intensity, lightChangeIntensity, lightChangeDelay, activeTime));
     }
 

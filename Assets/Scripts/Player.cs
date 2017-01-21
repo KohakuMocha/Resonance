@@ -69,8 +69,6 @@ public class Player : Singleton<Player>
             mouse_angle *= -1;
         else
             mouse_angle = 360 - mouse_angle;
-        print("mouse: " + mouse_angle);
-        print("player: " + player_angle);
         float angle_difference = mouse_angle - player_angle;
 
         if ((Mathf.Abs(angle_difference) > 1) || (player_angle > 359 && mouse_angle < 1))
