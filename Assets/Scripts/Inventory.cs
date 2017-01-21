@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour {
-
-	// Use this for initialization
-	void Start () {
+    public LinkedList<Items> inventory;
+    // Use this for initialization
+    void Start () {
 		
 	}
 	
@@ -13,4 +13,20 @@ public class Inventory : MonoBehaviour {
 	void Update () {
 		
 	}
+    public void addItem(Items obj)
+    {
+        inventory.AddLast(obj);
+    }
+    public bool checkItem(Items obj)
+    {
+        foreach (Items x in inventory)
+        {
+            if (obj == x)
+            {
+                inventory.Remove(x);
+                return true;
+            }
+        }
+        return false;
+    }
 }

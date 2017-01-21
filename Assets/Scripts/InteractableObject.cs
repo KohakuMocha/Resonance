@@ -1,9 +1,16 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+public enum Items
+{
+    Key,
+    Stone,
 
-public class NewBehaviourScript : MonoBehaviour {
 
+}
+public class InteractableObject : MonoBehaviour {
+
+    public Items typeOfItem;
 	// Use this for initialization
 	void Start () {
 		
@@ -13,4 +20,10 @@ public class NewBehaviourScript : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        collision.GetComponent<Inventory>().addItem(typeOfItem);
+        Destroy(this);
+    }
 }
