@@ -5,6 +5,7 @@ using UnityEngine;
 public class Player : Singleton<Player> {
 
     public int speed;
+    public Vector3 savePosition;
 
 	// Use this for initialization
 	void Start ()
