@@ -15,25 +15,44 @@ public class MoveableObject : MonoBehaviour {
                 if (position.x > 0)
                 {
                     //Create Coroutine to slowly transform position to give animation
-                    GetComponent<Rigidbody2D>().MovePosition(transform.position - transform.right * Distance);
+                    Vector3 EndPosition = transform.position - transform.right * Distance;
+                    StartCoroutine(BoulderAnimation(EndPosition));
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().MovePosition(transform.position + transform.right * Distance);
+                    Vector3 EndPosition = transform.position + transform.right * Distance;
+                    StartCoroutine(BoulderAnimation(EndPosition));
                 }
             }
             else
             {
                 if (position.y > 0)
                 {
-                    GetComponent<Rigidbody2D>().MovePosition(transform.position - transform.up * Distance);
+                    Vector3 EndPosition = transform.position - transform.up * Distance;
+                    StartCoroutine(BoulderAnimation(EndPosition));
                 }
                 else
                 {
-                    GetComponent<Rigidbody2D>().MovePosition(transform.position + transform.up * Distance);
+                    Vector3 EndPosition = transform.position - transform.right * Distance;
+                    StartCoroutine(BoulderAnimation(EndPosition));
                 }
+
             }
         }
     }
+    private IEnumerator BoulderAnimation(Vector3 EndPos)
+    {
+        Vector3 StartPos = this.transform.position;
+        Vector3 Movement = (EndPos - StartPos) * .25f;
+        GetComponent<Rigidbody2D>().MovePosition(transform.position + Movement);
+        yield return new WaitForSecondsRealtime(.2f);
+        GetComponent<Rigidbody2D>().MovePosition(transform.position + Movement);
+        yield return new WaitForSecondsRealtime(.2f);
+        GetComponent<Rigidbody2D>().MovePosition(transform.position + Movement);
+        yield return new WaitForSecondsRealtime(.2f);
+        GetComponent<Rigidbody2D>().MovePosition(transform.position + Movement);
+        yield return new WaitForSecondsRealtime(.2f);
 
+    }
 }
+
