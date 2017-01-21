@@ -23,8 +23,11 @@ public class InteractableObject : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        addItemToInventory();
-        Destroy(this);
+        if(collision.gameObject.tag == "Player")
+        {
+            addItemToInventory();
+            Destroy(this);
+        }
     }
     public void addItemToInventory()
     {
