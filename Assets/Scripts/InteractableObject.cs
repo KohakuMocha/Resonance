@@ -23,7 +23,11 @@ public class InteractableObject : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        collision.GetComponent<Inventory>().addItem(typeOfItem);
+        addItemToInventory();
         Destroy(this);
+    }
+    public void addItemToInventory()
+    {
+        GameObject.Find("Character").GetComponent<Inventory>().inventory.Add(this);
     }
 }

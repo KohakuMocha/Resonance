@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Inventory : MonoBehaviour {
-    public LinkedList<Items> inventory;
+    public List<InteractableObject> inventory;
     // Use this for initialization
     void Start () {
 		
@@ -13,15 +13,12 @@ public class Inventory : MonoBehaviour {
 	void Update () {
 		
 	}
-    public void addItem(Items obj)
-    {
-        inventory.AddLast(obj);
-    }
+    
     public bool checkItem(Items obj)
     {
-        foreach (Items x in inventory)
+        foreach (InteractableObject x in inventory)
         {
-            if (obj == x)
+            if (obj == x.typeOfItem)
             {
                 inventory.Remove(x);
                 return true;
