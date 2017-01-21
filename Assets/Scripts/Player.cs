@@ -6,6 +6,7 @@ public class Player : Singleton<Player> {
 
     public int speed;
     public Vector3 savePosition;
+    private Vector3 MousePos;
 
 	// Use this for initialization
 	void Start ()
@@ -39,12 +40,22 @@ public class Player : Singleton<Player> {
 
     void UpdateMouse()
     {
-        Vector3 mouse_position = Input.mousePosition;
-        Vector3 pos = Camera.main.WorldToScreenPoint(transform.position);
-        Vector3 dir = mouse_position - pos;
-        float angle = Mathf.Atan2(dir.y, dir.x);
-        //float angleDeg = Mathf.Atan2(mouse_position.y - transform.position.y, mouse_position.x - transform.position.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        MousePos = Input.mousePosition;
+        MousePos.z = 10;
+        MousePos = Camera.main.ScreenToWorldPoint(MousePos);
+        float mouse_angle = Mathf.Atan2(MousePos.x - transform.position.x, MousePos.y - transform.position.y) * Mathf.Rad2Deg;
+        float player_angle = transform.rotation.eulerAngles.z;
+
+        if (mouse_angle < 0)
+            mouse_angle *= -1;
+        else
+            mouse_angle = 360 - mouse_angle;
+        print("mouse: "+mouse_angle);
+        print("player: "+player_angle);
+        float angle_difference = mouse_angle - player_angle;
+
+        if ((Mathf.Abs(angle_difference) > 1) || (player_angle > 359 && mouse_angle < 1))
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, mouse_angle), 20 * Time.deltaTime);
 
     }
 }
