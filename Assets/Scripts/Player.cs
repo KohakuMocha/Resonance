@@ -2,31 +2,37 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Player : Singleton<Player> {
+public class Player : Singleton<Player>
+{
 
     public int speed;
     public Vector3 savePosition;
-    public GameObject echoSpawn;
+    public GameObject echo;
+    private float velocity = 3.0f;
     private Vector3 MousePos;
-
-	// Use this for initialization
-	void Start ()
+    private List<GameObject> Echoes = new List<GameObject>();
+    // Use this for initialization
+    void Start()
     {
-        DontDestroyOnLoad(transform.gameObject);
 
     }
-	
-	// Update is called once per frame
-	void Update ()
+
+    // Update is called once per frame
+    void Update()
     {
 
         UpdateMouse();
 
-        if(Input.GetMouseButtonDown(0))
+        // EKKO
+        if (Input.GetButtonDown("Space"))
         {
-            GameObject echo = (GameObject)Instantiate(Resources.Load("Prefabs/Echo2"), echoSpawn.transform.position, Quaternion.identity);
+            // Create new wave.
+            GameObject wave = (GameObject)Instantiate(echo, transform.position, Quaternion.identity);
+            // Get player face rotation and set to object.
+            wave.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z), 20 * Time.deltaTime);
+            Echoes.Add(wave);
         }
-        else if (Input.GetButton("Up"))
+        if (Input.GetButton("Up"))
         {
             GetComponent<Rigidbody2D>().MovePosition(transform.position + transform.up * speed * Time.deltaTime);
         }
@@ -42,7 +48,14 @@ public class Player : Singleton<Player> {
         {
             GetComponent<Rigidbody2D>().MovePosition(transform.position + transform.right * speed * Time.deltaTime);
         }
-	}
+
+        for (int i = 0; i < Echoes.Count; i++)
+        {
+            GameObject Echoo = Echoes[i];
+            Echoo.transform.Translate(new Vector3(0, 1) * Time.deltaTime * velocity);
+            //Echoo.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z), 20 * Time.deltaTime);
+        }
+    }
 
     void UpdateMouse()
     {
@@ -56,6 +69,8 @@ public class Player : Singleton<Player> {
             mouse_angle *= -1;
         else
             mouse_angle = 360 - mouse_angle;
+        print("mouse: " + mouse_angle);
+        print("player: " + player_angle);
         float angle_difference = mouse_angle - player_angle;
 
         if ((Mathf.Abs(angle_difference) > 1) || (player_angle > 359 && mouse_angle < 1))
