@@ -20,5 +20,6 @@ public class ResetLevel : MonoBehaviour {
     void triggerReset()
     {
         Application.LoadLevel(0);
+        Player.Instance.transform.position = Player.Instance.savePosition;
     }
 }
