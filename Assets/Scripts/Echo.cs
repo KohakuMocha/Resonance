@@ -21,6 +21,7 @@ public class Echo : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D collision){
 		// Do Stuff here on enter.
 		Debug.Log("Object response");
+		Destroy (gameObject);
 	}
 		
 	IEnumerator EchoWave(float time){
