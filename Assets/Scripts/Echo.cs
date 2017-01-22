@@ -18,6 +18,11 @@ public class Echo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+
+		// Fading awave.
+		Color color = GetComponent<SpriteRenderer>().color;
+		color.a -= 0.1f;
+		GetComponent<SpriteRenderer> ().color = color;
         Destroy(gameObject);
     }
 
@@ -47,16 +52,19 @@ public class Echo : MonoBehaviour
 
     void Update()
     {
-        // Fading awave.
+
         if (transform.localScale.y > 0.5f)
         {
             waveSize = transform.localScale.y - magnitude;
         }
-        if (transform.localScale.x < 5)
-        {
-
-            transform.localScale = new Vector3(transform.localScale.x + frequency, waveSize, 0);
-        }
-
+		if (transform.localScale.x < 5) {
+			transform.localScale = new Vector3 (transform.localScale.x + frequency, waveSize, 0);
+		} 
+		else {
+			// Fading awave.
+			Color color = GetComponent<SpriteRenderer> ().color;
+			color.a -= 0.1f;
+			GetComponent<SpriteRenderer> ().color = color;
+		}
     }
 }
