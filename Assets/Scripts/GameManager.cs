@@ -2,15 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GameMan : MonoBehaviour {
+public enum Resonance {Movement, Echoing};
+public class GameManager : Singleton<GameManager> {
+	public Resonance waves;
 
-	// Use this for initialization
 	void Start () {
-		
+		waves = Resonance.Movement;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
-		
+		switch (waves){
+		case Resonance.Movement:
+			
+			break;
+		case Resonance.Echoing:
+			break;
+		default:
+			waves = Resonance.Movement;
+			break;
+		}
 	}
 }
