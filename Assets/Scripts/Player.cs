@@ -51,9 +51,10 @@ public class Player : Singleton<Player>
 
         for (int i = 0; i < Echoes.Count; i++)
         {
-            GameObject Echoo = Echoes[i];
-            Echoo.transform.Translate(new Vector3(0, 1) * Time.deltaTime * velocity);
-            //Echoo.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z), 20 * Time.deltaTime);
+			if (Echoes[i]) {
+				GameObject Echoo = Echoes [i];
+				Echoo.transform.Translate (new Vector3 (0, 1) * Time.deltaTime * velocity);
+			}
         }
     }
 
