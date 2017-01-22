@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class ResourceManager : Singleton<ResourceManager> {
 
-	public IDictionary<string, GameObject> Prefabs = new Dictionary<string, GameObject>();
-    public IDictionary<string, AudioClip> Sounds = new Dictionary<string, AudioClip>();
+    public Dictionary<string, GameObject> Prefabs;
+    public Dictionary<string, AudioClip> Sounds;
 
     void Awake () {
+        Prefabs = new Dictionary<string, GameObject>();
+        Sounds = new Dictionary<string, AudioClip>();
         InitializePrefabs();
         InitializeSounds();
     }
@@ -23,7 +25,8 @@ public class ResourceManager : Singleton<ResourceManager> {
     private void InitializeSounds()
     {
         Sounds.Add("CalmForest", Resources.Load("Sounds/CalmForest") as AudioClip);
-        Sounds.Add("EchoSound", Resources.Load("Sounds/EchoSound") as AudioClip);
+        Sounds.Add("EchoSound", Resources.Load("Sounds/EchoNoise1") as AudioClip);
+        Sounds.Add("EchoSound1", Resources.Load("Sounds/EchoNoise2") as AudioClip);
         Sounds.Add("Lake", Resources.Load("Sounds/Lake") as AudioClip);
         Sounds.Add("StepsCave", Resources.Load("Sounds/StepsCave") as AudioClip);
         Sounds.Add("StepsDirt", Resources.Load("Sounds/StepsDirt") as AudioClip);

@@ -11,7 +11,14 @@ public class SoundManager : Singleton<SoundManager> {
 
     private void Awake()
     {
-        musicSource.clip = ResourceManager.Instance.Sounds["SadCave"];
+    }
+
+    private void Start()
+    {
+        //PlaySingle(ResourceManager.Instance.Sounds["StepsDirt"]);
+        //musicSource.clip = ResourceManager.Instance.Sounds["SadCave"];
+        //musicSource.Play();
+        //musicSource.volume = 0.8f;
     }
 
     //Used to play single sound clips.
@@ -26,10 +33,8 @@ public class SoundManager : Singleton<SoundManager> {
 
 
     //RandomizeSfx chooses randomly between various audio clips and slightly changes their pitch.
-    public void RandomizeSfx(params AudioClip[] clips)
+    public void RandomizeSfx(AudioClip clip)
     {
-        //Generate a random number between 0 and the length of our array of clips passed in.
-        int randomIndex = Random.Range(0, clips.Length);
 
         //Choose a random pitch to play back our clip at between our high and low pitch ranges.
         float randomPitch = Random.Range(lowPitchRange, highPitchRange);
@@ -38,7 +43,7 @@ public class SoundManager : Singleton<SoundManager> {
         efxSource.pitch = randomPitch;
 
         //Set the clip to the clip at our randomly chosen index.
-        efxSource.clip = clips[randomIndex];
+        efxSource.clip = clip;
 
         //Play the clip.
         efxSource.Play();
