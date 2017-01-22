@@ -21,13 +21,15 @@ public class Echo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-		Debug.Log ("ENTEERERER");
         if(collision.tag == "Player")
         {
             return;
         }
-		if (collision.gameObject.name == "Reflect" && !deflect) {
-			gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z + 180), 20 * Time.deltaTime);
+		if (collision.gameObject.tag == "Reflect" && !deflect) {
+			Debug.Log ("HIT");
+			//Quaternion.Euler(0, 0, gameObject.transform.rotation.z + 180)
+			//gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation, 20);
+			gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 85);
 			deflect = true;
 		}
 		else {
