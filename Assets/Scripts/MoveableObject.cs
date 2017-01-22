@@ -10,15 +10,25 @@ public class MoveableObject : MonoBehaviour {
     Vector3 end;
     float lerpdist;
     private float time;
-    private void OnCollisionEnter2D(Collision2D collision)
+
+
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (collision.gameObject.tag == "Player")
+        if (col.tag == "Player")
         {
-            print("Collision");
-            Vector2 dir = collision.contacts[0].point - (Vector2)this.transform.position;
-            dir = -dir.normalized;
-            StartCoroutine(BoulderAnimation(dir * Distance));
+            GetComponent<Rigidbody2D>().AddForce(col.transform.eulerAngles * Distance);
+            //TODO: DECREASE VELOCITY OF ROCK BY DEFAULT
             
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D col)
+    {
+        if (col.tag == "Player")
+        {
+            GetComponent<Rigidbody2D>().AddForce(col.transform.eulerAngles * Distance);
+            //TODO: DECREASE VELOCITY OF ROCK BY DEFAULT
+
         }
     }
     private IEnumerator BoulderAnimation(Vector3 EndPos)
@@ -34,6 +44,10 @@ public class MoveableObject : MonoBehaviour {
     }
     private void Update()
     {
+        if(GetComponent<Rigidbody2D>().velocity != Vector2.zero)
+        {
+            GetComponent<Rigidbody2D>().velocity -= GetComponent<Rigidbody2D>().velocity * 0.5f;
+        }
         if (lerping)
         {
             

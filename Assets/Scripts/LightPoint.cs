@@ -7,13 +7,13 @@ public class LightPoint : MonoBehaviour {
     [SerializeField]
     private bool isActive = true; //either on or off 
     [SerializeField]
-    private float activeTime; //amount of time that it's at its brigthest
+    private float activeTime; //amount of time the light is fully on for
     [SerializeField]
-    private float intensity; //amount of time that it's at its brigthest    
+    private float intensity; //the highest intensity a light point can have   
     [SerializeField]
-    private float lightChangeIntensity; //amount of time that it's at its brigthest
+    private float lightChangeIntensity; //the rate of decreasing/increasing intensity
     [SerializeField]
-    private float lightChangeDelay; //amount of time that it's at its brigthest
+    private float lightChangeDelay; //the wait time until the light increases intensity
     [SerializeField]
     private float z_axis; //how far the light should be. used for bigger objects.
     [SerializeField]
@@ -63,8 +63,7 @@ public class LightPoint : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("I HIT YOU");
-        //if (other.gameObject.tag.Equals("objectLight")) StartCoroutine(startLight(0.7f, .1f, 3));
+        if (other.tag.Equals("objectLight") || other.tag.Equals("echo"))
         StartCoroutine(startLight(boundingBox, intensity, lightChangeIntensity, lightChangeDelay, activeTime));
     }
 

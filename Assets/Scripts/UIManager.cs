@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UIManager : Singleton<UIManager> {
 
@@ -21,17 +22,19 @@ public class UIManager : Singleton<UIManager> {
 
     public void Play()
     {
-        
+        SceneManager.LoadScene("Level");
     }
 
     public void Credits()
     {
-
+        UIMainMenu.SetActive(false);
+        UICredits.SetActive(true);
     }
 
     public void Back()
     {
-
+        UICredits.SetActive(false);
+        UIMainMenu.SetActive(true);
     }
 
     public void Exit()

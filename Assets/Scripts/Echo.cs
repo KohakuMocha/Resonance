@@ -21,6 +21,10 @@ public class Echo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if(collision.tag == "Player")
+        {
+            return;
+        }
 		if (collision.gameObject.name == "Reflect" && !deflect) {
 			gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z + 180), 20 * Time.deltaTime);
 			deflect = true;
@@ -50,7 +54,6 @@ public class Echo : MonoBehaviour
 		// Fading awave.
 		Color color = GetComponent<SpriteRenderer> ().color;
 		color.a -= 0.1f;
-		Debug.Log (color.a);
 		GetComponent<SpriteRenderer> ().color = color;
 	}
 
