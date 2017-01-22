@@ -15,15 +15,23 @@ public class Echo : MonoBehaviour
 
     private float wave = 1.0f;
     private float waveSize;
+	private bool deflect;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
+		Debug.Log ("I HIT!");
 
-		// Fading awave.
-		Color color = GetComponent<SpriteRenderer>().color;
-		color.a -= 0.1f;
-		GetComponent<SpriteRenderer> ().color = color;
-        Destroy(gameObject);
+		if (collision.gameObject.name == "Reflect" && !deflect) {
+			gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z + 180), 20 * Time.deltaTime);
+			deflect = true;
+		}
+		else {
+			// Fading awave.
+			Color color = GetComponent<SpriteRenderer>().color;
+			color.a -= 0.1f;
+			GetComponent<SpriteRenderer> ().color = color;
+			Destroy (gameObject);
+		}
     }
 
 	void OnBecameInvisible() {
@@ -39,13 +47,14 @@ public class Echo : MonoBehaviour
 
     void Start()
     {
-        if (source)
+		deflect = false;
+        if (source == true)
         {
-            float time = 3f;
+            float time = 1.0f;
             for (int i = 0; i < trail; i++)
             {
-                time += 0.2f;
-                StartCoroutine(EchoWave(time));
+				StartCoroutine(EchoWave(time));
+				time += 0.5f;
             }
         }
     }
@@ -62,9 +71,11 @@ public class Echo : MonoBehaviour
 		} 
 		else {
 			// Fading awave.
+			/*
 			Color color = GetComponent<SpriteRenderer> ().color;
 			color.a -= 0.1f;
 			GetComponent<SpriteRenderer> ().color = color;
+			*/
 		}
     }
 }
