@@ -12,10 +12,13 @@ public class Echo : MonoBehaviour
     public int trail;
     // Source: Choose if the wave is main source; only main source spawns trailing waves.
     public bool source;
-
+	// Velocity:
+	private float velocity = 3.0f;
     private float wave = 1.0f;
     private float waveSize;
 	private bool deflect;
+	private List<GameObject> Echoes = new List<GameObject>();
+	GameObject newWave;
 
     void OnTriggerEnter2D(Collider2D collision)
     {
@@ -41,7 +44,8 @@ public class Echo : MonoBehaviour
     IEnumerator EchoWave(float time)
     {
         yield return new WaitForSeconds(time);
-        GameObject newWave = Instantiate(gameObject, transform.position, Quaternion.identity);
+        newWave = Instantiate(gameObject, transform.position, Quaternion.identity);
+		Echoes.Add (newWave);
         newWave.GetComponent<Echo>().source = false;
     }
 
@@ -50,7 +54,7 @@ public class Echo : MonoBehaviour
 		deflect = false;
         if (source == true)
         {
-            float time = 1.0f;
+            float time = .1f;
             for (int i = 0; i < trail; i++)
             {
 				StartCoroutine(EchoWave(time));
@@ -61,7 +65,11 @@ public class Echo : MonoBehaviour
 
     void Update()
     {
-
+		for (int i = 0; i < Echoes.Count; i++) {
+			if (Echoes [i]) {
+				Echoes[i].transform.Translate (new Vector3 (0, 1) * Time.deltaTime * velocity);
+			}
+		}
         if (transform.localScale.y > 0.5f)
         {
             waveSize = transform.localScale.y - magnitude;
