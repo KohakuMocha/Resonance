@@ -22,13 +22,13 @@ public class ResourceManager : Singleton<ResourceManager> {
 
     private void InitializeSounds()
     {
-        Prefabs.Add("CalmForest", Resources.Load("Sounds/CalmForest") as GameObject);
-        Prefabs.Add("Echo", Resources.Load("Sounds/Echo") as GameObject);
-        Prefabs.Add("Lake", Resources.Load("Sounds/Lake") as GameObject);
-        Prefabs.Add("StepsCave", Resources.Load("Sounds/StepsCave") as GameObject);
-        Prefabs.Add("StepsDirt", Resources.Load("Sounds/StepsDirt") as GameObject);
-        Prefabs.Add("StepsGrass", Resources.Load("Sounds/StepsGrass") as GameObject);
-        Prefabs.Add("SadCave", Resources.Load("Sounds/SadCave") as GameObject);
-        Prefabs.Add("Whoosh", Resources.Load("Sounds/Whoosh") as GameObject);
+        Sounds.Add("CalmForest", Resources.Load("Sounds/CalmForest") as AudioClip);
+        Sounds.Add("EchoSound", Resources.Load("Sounds/EchoSound") as AudioClip);
+        Sounds.Add("Lake", Resources.Load("Sounds/Lake") as AudioClip);
+        Sounds.Add("StepsCave", Resources.Load("Sounds/StepsCave") as AudioClip);
+        Sounds.Add("StepsDirt", Resources.Load("Sounds/StepsDirt") as AudioClip);
+        Sounds.Add("StepsGrass", Resources.Load("Sounds/StepsGrass") as AudioClip);
+        Sounds.Add("SadCave", Resources.Load("Sounds/SadCave") as AudioClip);
+        Sounds.Add("Whoosh", Resources.Load("Sounds/Whoosh") as AudioClip);
     }
 }
