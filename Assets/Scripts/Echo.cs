@@ -14,7 +14,6 @@ public class Echo : MonoBehaviour
     public bool source;
 	// Velocity:
 	private float velocity = 3.0f;
-    private float wave = 1.0f;
     private float waveSize;
 	private bool deflect;
 	private List<GameObject> Echoes = new List<GameObject>();
@@ -22,17 +21,11 @@ public class Echo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-		Debug.Log ("I HIT!");
-
 		if (collision.gameObject.name == "Reflect" && !deflect) {
 			gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z + 180), 20 * Time.deltaTime);
 			deflect = true;
 		}
 		else {
-			// Fading awave.
-			Color color = GetComponent<SpriteRenderer>().color;
-			color.a -= 0.1f;
-			GetComponent<SpriteRenderer> ().color = color;
 			Destroy (gameObject);
 		}
     }
@@ -43,47 +36,55 @@ public class Echo : MonoBehaviour
 
     IEnumerator EchoWave(float time)
     {
+		Vector3 previous = transform.position;
         yield return new WaitForSeconds(time);
-        newWave = Instantiate(gameObject, transform.position, Quaternion.identity);
+		newWave = Instantiate(gameObject, previous, Quaternion.identity);
+		newWave.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z), 20 * Time.deltaTime);
 		Echoes.Add (newWave);
         newWave.GetComponent<Echo>().source = false;
     }
 
+	IEnumerator EchoEcho(float time)
+	{        
+		yield return new WaitForSeconds(time);
+		// Fading awave.
+		Color color = GetComponent<SpriteRenderer> ().color;
+		color.a -= 0.1f;
+		Debug.Log (color.a);
+		GetComponent<SpriteRenderer> ().color = color;
+	}
+
     void Start()
     {
 		deflect = false;
-        if (source == true)
+        if (source)
         {
-            float time = .1f;
+            float time = 0.4f;
             for (int i = 0; i < trail; i++)
             {
 				StartCoroutine(EchoWave(time));
-				time += 0.5f;
             }
         }
     }
 
     void Update()
-    {
+	{
+		Color color = GetComponent<SpriteRenderer> ().color;
+		if (color.a < 0) {
+			Destroy (gameObject);
+		}
+		StartCoroutine(EchoEcho(1.0f));
 		for (int i = 0; i < Echoes.Count; i++) {
 			if (Echoes [i]) {
 				Echoes[i].transform.Translate (new Vector3 (0, 1) * Time.deltaTime * velocity);
 			}
 		}
-        if (transform.localScale.y > 0.5f)
+        if (transform.localScale.y > 0.1f)
         {
             waveSize = transform.localScale.y - magnitude;
         }
-		if (transform.localScale.x < 5) {
+		if (transform.localScale.x < 25) {
 			transform.localScale = new Vector3 (transform.localScale.x + frequency, waveSize, 0);
-		} 
-		else {
-			// Fading awave.
-			/*
-			Color color = GetComponent<SpriteRenderer> ().color;
-			color.a -= 0.1f;
-			GetComponent<SpriteRenderer> ().color = color;
-			*/
 		}
     }
 }
