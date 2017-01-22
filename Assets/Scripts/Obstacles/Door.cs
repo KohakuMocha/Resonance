@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Door : MonoBehaviour {
 
-    public List<int> SwitchKeyValues;
 	// Use this for initialization
 	void Start () {
-        
+		
 	}
 	
 	// Update is called once per frame
@@ -15,12 +14,19 @@ public class Door : MonoBehaviour {
 		
 	}
 
-    public void checkOpened()
+    public void OnTriggerEnter2D(Collider2D other)
     {
-        if (SwitchKeyValues.Count == 0)
-        { 
-            Destroy(this.GetComponent<BoxCollider2D>());
-
+        if(other.tag == "Player")
+        {
+            if(other.GetComponent<Inventory>().checkItem(Items.Key))
+            {
+                Debug.Log("OPEN SESAME");
+                GetComponent<Collider2D>().enabled = false;
+            }
+            else
+            {
+                Debug.Log("WHERE'S MY DAM KEY");
+            }
         }
     }
 }

@@ -44,11 +44,11 @@ public class UIManager : Singleton<UIManager> {
 
     public void DisplayKey()
     {
-        GameObject key = Instantiate<GameObject>(KeyPrefab);
-        key.transform.parent = this.transform;
+        //GameObject key = Instantiate<GameObject>(KeyPrefab);
+        //key.transform.parent = this.transform;
     }
     public void RemoveKey()
     {
-       Destroy( this.GetComponent<Canvas>());
+       //Destroy( this.GetComponent<Canvas>());
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Switch : MonoBehaviour {
 
     public int KeyValue;
-    public Door door;
+    public SwitchDoor door;
 	// Use this for initialization
 	void Start () {
 		
