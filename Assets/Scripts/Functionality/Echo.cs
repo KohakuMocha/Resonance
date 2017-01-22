@@ -13,7 +13,7 @@ public class Echo : MonoBehaviour
     // Source: Choose if the wave is main source; only main source spawns trailing waves.
     public bool source;
 	// Velocity:
-	private float velocity = 3.0f;
+	public float velocity = 3.0f;
     private float waveSize;
 	private bool deflect;
 	private List<GameObject> Echoes = new List<GameObject>();
@@ -21,13 +21,15 @@ public class Echo : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-		Debug.Log ("ENTEERERER");
         if(collision.tag == "Player")
         {
             return;
         }
-		if (collision.gameObject.name == "Reflect" && !deflect) {
-			gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z + 180), 20 * Time.deltaTime);
+		if (collision.gameObject.tag == "Reflect" && !deflect) {
+			Debug.Log ("HIT");
+			//Quaternion.Euler(0, 0, gameObject.transform.rotation.z + 180)
+			//gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation, 20);
+			gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 85);
 			deflect = true;
 		}
 		else {
@@ -54,7 +56,7 @@ public class Echo : MonoBehaviour
 		yield return new WaitForSeconds(time);
 		// Fading awave.
 		Color color = GetComponent<SpriteRenderer> ().color;
-		color.a -= 0.1f;
+		color.a -= 0.01f;
 		GetComponent<SpriteRenderer> ().color = color;
 	}
 
@@ -87,7 +89,7 @@ public class Echo : MonoBehaviour
         {
             waveSize = transform.localScale.y - magnitude;
         }
-		if (transform.localScale.x < 2   ) {
+		if (transform.localScale.x < 2 ) {
 			transform.localScale = new Vector3 (transform.localScale.x + frequency, waveSize, 0);
 		}
     }
