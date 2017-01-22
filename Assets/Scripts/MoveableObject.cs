@@ -17,18 +17,6 @@ public class MoveableObject : MonoBehaviour {
         if (col.tag == "Player")
         {
             GetComponent<Rigidbody2D>().AddForce(col.transform.eulerAngles * Distance);
-            //TODO: DECREASE VELOCITY OF ROCK BY DEFAULT
-            
-        }
-    }
-
-    private void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.tag == "Player")
-        {
-            GetComponent<Rigidbody2D>().AddForce(col.transform.eulerAngles * Distance);
-            //TODO: DECREASE VELOCITY OF ROCK BY DEFAULT
-
         }
     }
     private IEnumerator BoulderAnimation(Vector3 EndPos)
@@ -46,7 +34,7 @@ public class MoveableObject : MonoBehaviour {
     {
         if(GetComponent<Rigidbody2D>().velocity != Vector2.zero)
         {
-            GetComponent<Rigidbody2D>().velocity -= GetComponent<Rigidbody2D>().velocity * 0.5f;
+            GetComponent<Rigidbody2D>().velocity -= GetComponent<Rigidbody2D>().velocity * 0.25f;
         }
         if (lerping)
         {
