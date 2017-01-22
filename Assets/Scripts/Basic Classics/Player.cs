@@ -23,7 +23,7 @@ public class Player : Singleton<Player>
 
     private void Awake()
     {
-        MyAnimator = GameObject.FindObjectOfType<Animator>();
+        MyAnimator = GetComponent<Animator>();
         Aim = transform.FindChild("Aim");
         RigidBody = GetComponent<Rigidbody2D>();
         RigidBody.velocity = Vector2.zero;
