@@ -21,6 +21,10 @@ public class Echo : MonoBehaviour
         Destroy(gameObject);
     }
 
+	void OnBecameInvisible() {
+		Destroy(gameObject);
+	}
+
     IEnumerator EchoWave(float time)
     {
         yield return new WaitForSeconds(time);
