@@ -59,7 +59,8 @@ public class Player : Singleton<Player>
 			// Create new wave.
 			GameObject wave = (GameObject)Instantiate (echo, transform.position, Quaternion.identity);
 			// Get player face rotation and set to object.
-			wave.transform.rotation = Quaternion.Slerp (transform.rotation, Quaternion.Euler (0, 0, gameObject.transform.rotation.z), 20 * Time.deltaTime);
+			// Quaternion.Euler (0, 0, gameObject.transform.rotation.z)
+			wave.transform.rotation = Quaternion.Slerp (transform.rotation, transform.rotation, 20 * Time.deltaTime);
 			Echoes.Add (wave);
 			waves = Resonance.Movement;
 			StartCoroutine (Wait ());
