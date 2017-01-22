@@ -15,12 +15,14 @@ public class SwitchDoor : MonoBehaviour {
 		
 	}
 
-    public void checkOpened()
+    public bool checkOpened()
     {
         if (SwitchKeyValues.Count == 0)
         { 
-            Destroy(this.GetComponent<BoxCollider2D>());
+            Destroy(gameObject);
+            return true;
 
         }
+        return false;
     }
 }
