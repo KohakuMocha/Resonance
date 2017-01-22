@@ -33,6 +33,7 @@ public class Player : Singleton<Player>
 
         switch (waves)
         {
+       
             case Resonance.Movement:
                 // ECHO
                 if (Input.GetButtonDown("Space"))
@@ -59,6 +60,7 @@ public class Player : Singleton<Player>
                 break;
             case Resonance.Echoing:
                 // Create new wave.
+                SoundManager.Instance.RandomizeSfx(ResourceManager.Instance.Sounds["EchoSound"]);
                 GameObject wave = (GameObject)Instantiate(echo, transform.position, Quaternion.identity);
                 // Get player face rotation and set to object.
                 // Quaternion.Euler (0, 0, gameObject.transform.rotation.z)
