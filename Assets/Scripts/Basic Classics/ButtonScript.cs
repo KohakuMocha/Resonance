@@ -10,16 +10,6 @@ public class ButtonScript : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-        //Change Opacity of Inner Box
-        Color temp = this.GetComponent<Image>().color;
-        temp.a = 0.6f;
-        this.GetComponent<Image>().color = temp;
-
-        //Change Opactiy of OuterBox
-        OuterBox.GetComponent<Image>().sprite = OffHoverOuterBox;
-        Color temp2 = OuterBox.GetComponent<Image>().color;
-        temp2.a = 0.6f;
-        OuterBox.GetComponent<Image>().color = temp2;
     }
 	public void OnHover()
     {
