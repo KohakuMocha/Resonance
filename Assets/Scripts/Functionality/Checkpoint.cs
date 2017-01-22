@@ -16,6 +16,6 @@ public class Checkpoint : MonoBehaviour {
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if(collision.gameObject.tag == "Player")
-            Player.Instance.savePosition = this.transform.position;
+        Player.Instance.savePosition = this.transform.position;
     }
 }

@@ -6,7 +6,7 @@ public class Player : Singleton<Player>
 {
 	public Resonance waves;
     public int speed;
-    private Vector3 savePosition;
+    public Vector3 savePosition;
     public GameObject echo;
     private float velocity = 2.0f;
     private Vector3 MousePos;
