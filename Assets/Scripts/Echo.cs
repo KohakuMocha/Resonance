@@ -86,7 +86,7 @@ public class Echo : MonoBehaviour
         {
             waveSize = transform.localScale.y - magnitude;
         }
-		if (transform.localScale.x < 25) {
+		if (transform.localScale.x < 2   ) {
 			transform.localScale = new Vector3 (transform.localScale.x + frequency, waveSize, 0);
 		}
     }
