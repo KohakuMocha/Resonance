@@ -15,8 +15,6 @@ public class LightPoint : MonoBehaviour {
     [SerializeField]
     private float lightChangeDelay; //the wait time until the light increases intensity
     [SerializeField]
-    private float z_axis; //how far the light should be. used for bigger objects.
-    [SerializeField]
     private float boundingBox; //how big the bounding box for the light collider to be. 
 
     IEnumerator startLight(float bBox, float intensity, float lightChangeIntensity, float lightChangeDelay, float activeTime)
@@ -63,14 +61,16 @@ public class LightPoint : MonoBehaviour {
 
     void OnTriggerEnter2D(Collider2D other)
     {
+
         if (other.tag.Equals("objectLight") || other.tag.Equals("echo"))
-        StartCoroutine(startLight(boundingBox, intensity, lightChangeIntensity, lightChangeDelay, activeTime));
+        {
+            Debug.Log(other.tag);
+            StartCoroutine(startLight(boundingBox, intensity, lightChangeIntensity, lightChangeDelay, activeTime));
+        }
     }
 
     // Use this for initialization
     void Start () {
-        //StartCoroutine(startLight(1f, 0.01f, 3));
-        transform.position = new Vector3(transform.position.x, transform.position.y, z_axis);
 	}
 	
 	// Update is called once per frame
