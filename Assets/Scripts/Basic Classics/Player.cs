@@ -6,11 +6,12 @@ public class Player : Singleton<Player>
 {
 	public Resonance waves;
     public int speed;
-    public Vector3 savePosition;
+    private Vector3 savePosition;
     public GameObject echo;
     private float velocity = 2.0f;
     private Vector3 MousePos;
     private List<GameObject> Echoes = new List<GameObject>();
+    public bool isDead;
 
 	IEnumerator Wait(){
 		yield return new WaitForSeconds (2);
@@ -19,7 +20,7 @@ public class Player : Singleton<Player>
     // Use this for initialization
     void Start()
     {
-
+        SetCheckPoint();
     }
 
     // Update is called once per frame
@@ -90,5 +91,15 @@ public class Player : Singleton<Player>
         if ((Mathf.Abs(angle_difference) > 1) || (player_angle > 359 && mouse_angle < 1))
             transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, mouse_angle), 20 * Time.deltaTime);
 
+    }
+
+    public void SetCheckPoint()
+    {
+        savePosition = transform.position;
+    }
+
+    public void Restart()
+    {
+        transform.position = savePosition;
     }
 }
