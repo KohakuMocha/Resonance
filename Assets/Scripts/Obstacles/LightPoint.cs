@@ -64,7 +64,7 @@ public class LightPoint : MonoBehaviour {
 
         if (other.tag.Equals("objectLight") || other.tag.Equals("echo"))
         {
-            Debug.Log(other.tag);
+            //Debug.Log(other.tag);
             StartCoroutine(startLight(boundingBox, intensity, lightChangeIntensity, lightChangeDelay, activeTime));
         }
     }
