@@ -21,6 +21,7 @@ public class Inventory : MonoBehaviour {
             if (obj == x.typeOfItem)
             {
                 inventory.Remove(x);
+                UIManager.Instance.RemoveKey();
                 return true;
             }
         }
