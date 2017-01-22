@@ -13,9 +13,9 @@ public class Checkpoint : MonoBehaviour {
 	void Update () {
 		
 	}
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
-        Player.Instance.savePosition = this.transform.position;
+        if (collision.gameObject.tag == "Player")
+            Player.Instance.SetCheckPoint();
     }
 }
