@@ -46,7 +46,8 @@ public class Echo : MonoBehaviour
 		Vector3 previous = transform.position;
         yield return new WaitForSeconds(time);
 		newWave = Instantiate(gameObject, previous, Quaternion.identity);
-		newWave.transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.Euler(0, 0, gameObject.transform.rotation.z), 20 * Time.deltaTime);
+		newWave.transform.localScale = new Vector3 (0.17f, 0.1f, 0);
+		newWave.transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation, 20 * Time.deltaTime);
 		Echoes.Add (newWave);
         newWave.GetComponent<Echo>().source = false;
     }
@@ -62,19 +63,27 @@ public class Echo : MonoBehaviour
 
     void Start()
     {
+		// Fading awave.
+		Color color = GetComponent<SpriteRenderer> ().color;
+		color.a = 0.5f;
+		GetComponent<SpriteRenderer> ().color = color;
 		deflect = false;
         if (source)
         {
-            float time = 0.4f;
+            float time = 0.2f;
             for (int i = 0; i < trail; i++)
             {
 				StartCoroutine(EchoWave(time));
+				time += 0.2f;
             }
         }
     }
 
     void Update()
 	{
+		if (!source) {
+			transform.Translate (new Vector3 (0, 1) * Time.deltaTime * velocity);
+		}
 		Color color = GetComponent<SpriteRenderer> ().color;
 		if (color.a < 0) {
 			Destroy (gameObject);
@@ -85,11 +94,11 @@ public class Echo : MonoBehaviour
 				Echoes[i].transform.Translate (new Vector3 (0, 1) * Time.deltaTime * velocity);
 			}
 		}
-        if (transform.localScale.y > 0.1f)
+        if (transform.localScale.y > 0.001f)
         {
             waveSize = transform.localScale.y - magnitude;
         }
-		if (transform.localScale.x < 2 ) {
+		if (transform.localScale.x < 2) {
 			transform.localScale = new Vector3 (transform.localScale.x + frequency, waveSize, 0);
 		}
     }

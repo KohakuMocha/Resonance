@@ -17,15 +17,19 @@ public class Switch : MonoBehaviour {
 	}
     private void OnTriggerEnter2D(Collider2D collision)
     {
-            foreach(int x in door.SwitchKeyValues)
+        if (door != null)
         {
-            if(x == KeyValue)
+            foreach (int x in door.SwitchKeyValues)
             {
-                print("bug");
-                door.SwitchKeyValues.Remove(x);
-                break;
+                if (x == KeyValue)
+                {
+                    print("bug");
+                    door.SwitchKeyValues.Remove(x);
+                    break;
+                }
             }
+            if (door.checkOpened())
+                door = null;
         }
-            door.checkOpened();
     }
 }
