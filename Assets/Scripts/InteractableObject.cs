@@ -26,6 +26,7 @@ public class InteractableObject : MonoBehaviour {
         if(collision.gameObject.tag == "Player")
         {
             addItemToInventory();
+            Destroy(this.GetComponent<SpriteRenderer>());
             Destroy(this);
         }
     }
