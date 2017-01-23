@@ -15,10 +15,7 @@ public class SoundManager : Singleton<SoundManager> {
 
     private void Start()
     {
-        //PlaySingle(ResourceManager.Instance.Sounds["StepsDirt"]);
-        //musicSource.clip = ResourceManager.Instance.Sounds["SadCave"];
-        //musicSource.Play();
-        //musicSource.volume = 0.8f;
+        musicSource.volume = 0.8f;
     }
 
     //Used to play single sound clips.

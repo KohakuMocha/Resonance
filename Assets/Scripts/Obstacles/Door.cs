@@ -20,8 +20,7 @@ public class Door : MonoBehaviour {
         {
             if(other.GetComponent<Inventory>().checkItem(Items.Key))
             {
-                Debug.Log("OPEN SESAME");
-                GetComponent<Collider2D>().enabled = false;
+                Destroy(this.gameObject);
             }
             else
             {

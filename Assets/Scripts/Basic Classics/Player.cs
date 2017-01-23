@@ -29,7 +29,8 @@ public class Player : Singleton<Player>
     {
 
         UpdateMouse();
-
+        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        GetComponent<Rigidbody2D>().angularVelocity = 0;
 
         switch (waves)
         {

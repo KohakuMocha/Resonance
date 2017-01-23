@@ -22,7 +22,7 @@ public class UIManager : Singleton<UIManager> {
 
     public void Play()
     {
-        SceneManager.LoadScene("Level");
+        SceneManager.LoadScene("Cave");
     }
 
     public void Credits()

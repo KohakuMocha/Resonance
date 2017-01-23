@@ -33,6 +33,5 @@ public class InteractableObject : MonoBehaviour {
     public void addItemToInventory()
     {
         Player.Instance.GetComponent<Inventory>().inventory.Add(this);
-        UIManager.Instance.DisplayKey();
     }
 }
