@@ -2,23 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Resonance {Movement, Echoing};
+public enum States {Movement, Echoing, Idle};
 public class GameManager : Singleton<GameManager> {
-	public Resonance waves;
+	public States waves;
 
 	void Start () {
-		waves = Resonance.Movement;
+		waves = States.Movement;
 	}
 
 	void Update () {
 		switch (waves){
-		case Resonance.Movement:
+		case States.Movement:
 			
 			break;
-		case Resonance.Echoing:
+		case States.Echoing:
 			break;
 		default:
-			waves = Resonance.Movement;
+			waves = States.Movement;
 			break;
 		}
 	}
