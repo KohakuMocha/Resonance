@@ -10,7 +10,7 @@ public class Player : Singleton<Player>
     public Vector3 savePosition;
     private GameObject echo;
     private Transform Aim;
-    private float velocity = 3.0f;
+    private float velocity = 1.0f;
     private List<GameObject> Echoes = new List<GameObject>();
     private Animator MyAnimator;
     public bool isDead;
