@@ -10,7 +10,7 @@ public class Player : Singleton<Player>
     public Vector3 savePosition;
     private GameObject echo;
     private Transform Aim;
-    private float velocity = 1.0f;
+    private float velocity = 2.5f;
     private List<GameObject> Echoes = new List<GameObject>();
     private Animator MyAnimator;
     public bool isDead;
@@ -35,17 +35,18 @@ public class Player : Singleton<Player>
 
     void Update()
     {
-        print("update");
+
+        RigidBody.velocity = Vector2.zero;
+        RigidBody.angularVelocity = 0;
+
         if (!CoroutineRunning && Input.anyKey) {
             if (Input.GetButton("Up") || Input.GetButton("Down") || Input.GetButton("Left") || Input.GetButton("Right")) {
                 CurrentState = States.Movement;
                 MyAnimator.speed = 1;
-                print("move");
             }
             else if (Input.GetMouseButtonDown(0) || Input.GetButton("Space")) {
                 CurrentState = States.Echoing;
                 MyAnimator.speed = 0;
-                print("space");
             }
 
             StartCoroutine(GetInput());
@@ -102,7 +103,6 @@ public class Player : Singleton<Player>
                     MyAnimator.Play("right");
                     MovementDirection = transform.right;
                 }
-                print("attempted move");
                 RigidBody.MovePosition(transform.position + MovementDirection * speed * Time.deltaTime);
                 CurrentState = States.Idle;
                 break;
