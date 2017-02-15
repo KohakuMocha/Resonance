@@ -25,54 +25,50 @@ public class Echo : MonoBehaviour
         {
             return;
         }
-
-        switch (collision.gameObject.tag)
+        if (!deflect)
         {
-            case "Top0":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
-                break;
-            case "Top1":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
-                break;
-            case "Top2":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z - 90);
-                break;
-            case "Bot0":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
-                break;
-            case "Bot1":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
-                break;
-            case "Bot2":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z - 90);
-                break;
-            case "Left0":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
-                break;
-            case "Left1":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
-                break;
-            case "Left2":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z - 90);
-                break;
-            case "Right0":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
-                break;
-            case "Right1":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
-                break;
-            case "Right2":
-                gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z - 90);
-                break;
+            switch (collision.gameObject.tag)
+            {
+                case "Top0":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
+                    break;
+                case "Top1":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
+                    break;
+                case "Top2":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z - 90);
+                    break;
+                case "Bot0":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
+                    break;
+                case "Bot1":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
+                    break;
+                case "Bot2":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z - 90);
+                    break;
+                case "Left0":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
+                    break;
+                case "Left1":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
+                    break;
+                case "Left2":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z - 90);
+                    break;
+                case "Right0":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
+                    break;
+                case "Right1":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 180);
+                    break;
+                case "Right2":
+                    gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z - 90);
+                    break;
+            }
+            deflect = true;
         }
-        if (collision.gameObject.tag == "Top" || collision.gameObject.tag == "T")
-        {
-            Debug.Log("HIT");
-            //Quaternion.Euler(0, 0, gameObject.transform.rotation.z + 180)
-            //gameObject.transform.rotation = Quaternion.Slerp(transform.rotation, transform.rotation, 20);
-            //gameObject.transform.Rotate(0, 0, gameObject.transform.rotation.z + 90);
-            //deflect = true;
-        }
+        
         else {
             //Destroy(gameObject);
         }
