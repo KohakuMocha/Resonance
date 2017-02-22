@@ -7,7 +7,6 @@ public class UIManager : Singleton<UIManager> {
 
     public GameObject UIMainMenu;
     public GameObject UICredits;
-    public GameObject KeyPrefab;
 
 
 	// Use this for initialization
@@ -42,13 +41,4 @@ public class UIManager : Singleton<UIManager> {
         Application.Quit();
     }
 
-    public void DisplayKey()
-    {
-        //GameObject key = Instantiate<GameObject>(KeyPrefab);
-        //key.transform.parent = this.transform;
-    }
-    public void RemoveKey()
-    {
-       //Destroy( this.GetComponent<Canvas>());
-    }
 }
