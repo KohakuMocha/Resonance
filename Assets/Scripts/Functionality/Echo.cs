@@ -95,7 +95,7 @@ public class Echo : MonoBehaviour
         yield return new WaitForSeconds(time);
         // Fading awave.
         Color color = GetComponent<SpriteRenderer>().color;
-        color.a -= 0.01f;
+        //color.a -= 0.01f;
         GetComponent<SpriteRenderer>().color = color;
     }
 
