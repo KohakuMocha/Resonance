@@ -45,6 +45,7 @@ public class Player : Singleton<Player>
                 MyAnimator.speed = 1;
             }
             else if (Input.GetMouseButtonDown(0) || Input.GetButton("Space")) {
+                FollowMouse();
                 CurrentState = States.Echoing;
                 MyAnimator.speed = 0;
             }

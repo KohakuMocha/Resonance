@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Hole : MonoBehaviour {
 
-    public Sprite rockInHoleSprite;
+    [SerializeField]
+    private Sprite rockInHoleSprite;
+    [SerializeField]
+    private GameObject blocker;
 
 	// Use this for initialization
 	void Start () {
@@ -23,6 +26,7 @@ public class Hole : MonoBehaviour {
         if(other.tag == "rock")
         {
             GetComponent<SpriteRenderer>().sprite = rockInHoleSprite;
+            Destroy(blocker);
             Destroy(other.gameObject);
         }
     }
