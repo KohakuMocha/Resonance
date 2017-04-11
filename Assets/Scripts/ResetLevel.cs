@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ResetLevel : MonoBehaviour {
 
@@ -19,7 +20,7 @@ public class ResetLevel : MonoBehaviour {
     }
     void triggerReset()
     {
-        Application.LoadLevel(0);
+        SceneManager.LoadScene(0);
         Player.Instance.transform.position = Player.Instance.savePosition;
     }
 }

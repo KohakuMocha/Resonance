@@ -48,6 +48,7 @@ public class Player : Singleton<Player>
                 FollowMouse();
                 CurrentState = States.Echoing;
                 MyAnimator.speed = 0;
+                SoundManager.Instance.RandomizeSfx(ResourceManager.Instance.Sounds["EchoSound"]);
             }
 
             StartCoroutine(GetInput());

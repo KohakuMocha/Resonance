@@ -8,6 +8,7 @@ public class Song : MonoBehaviour {
 	void Start () {
         SoundManager.Instance.musicSource.clip = ResourceManager.Instance.Sounds["SadCave"];
         SoundManager.Instance.musicSource.Play();
+        SoundManager.Instance.musicSource.loop = true;
     }
 	
 	// Update is called once per frame

@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainCamera : MonoBehaviour {
 
@@ -47,6 +48,7 @@ public class MainCamera : MonoBehaviour {
 
     IEnumerator wait1()
     {
-        yield return new WaitForSeconds(15);
+        yield return new WaitForSeconds(10);
+        SceneManager.LoadScene("MainMenu");
     }
 }
