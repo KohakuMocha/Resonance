@@ -2,19 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class MainCamera : MonoBehaviour {
 
     public bool final = false;
     public float xBound;
     public float yBound;
-    GameObject screen;
+    public Image screen;
     float x = 0.0f;
     float y = 0.0f;
     // Use this for initialization
     void Start () {
-        screen = GameObject.Find("ResonanceCanvas");
-	}
+        screen.canvasRenderer.SetAlpha(0.0f);
+    }
 	
 	// Update is called once per frame
 	void LateUpdate () {
@@ -37,9 +38,8 @@ public class MainCamera : MonoBehaviour {
             else
             {
                 StartCoroutine(wait1());
-                Color s = new Color(0f, 0f, 0f, 0.012f);
 
-                screen.GetComponent<SpriteRenderer>().color += s;
+                screen.CrossFadeAlpha(1, 3, false);
             }
             
         }
